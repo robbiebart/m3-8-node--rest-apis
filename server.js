@@ -47,6 +47,10 @@ const addClientHandler = (req, res) => {
   res.status(200).send({ clients: clients });
 };
 
+const hangmanHandler = (req, res) => {
+  
+}
+
 express()
   .use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -67,5 +71,7 @@ express()
   .get("/clients/:id", singleClientHandler)
 
   .post("/clients/add", addClientHandler)
+
+  .get("/hangman/word/:id", hangmanHandler)
 
   .listen(8000, () => console.log(`Listening on port 8000`));
