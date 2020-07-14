@@ -17,3 +17,28 @@ Write out each endpoint, its method, and brief description of waht it should do.
 _This activity is more about the discussion in how to best organize data endpoints. There will not be any coding._
 
 ## Your Answer
+
+Endpoint - Method - Description
+/productsForSale - GET - All products in cafe
+/productsForSale/id - DELETE - product goes bad
+/productsForSale/id - POST - we get our shipment for inventory
+/productstoPurchase - GET - products we need to run the shop
+/inventory - GET - products we have
+/productsForSale/id- GET - what we are selling
+/productstoPurchase/id- POST - update what we have
+/inventory/id - GET - see our inventory
+/customers - GET - list of all custoemrs coming in
+/customers/id - GET - individual id per customer - how long customers wait during different times during the day - how much they spend
+/customers - POST - new id for new customer
+/customer/id - DELETE - remove customer id
+/customer/id - PUT - address change for membership
+/location - GET - cafe location
+/location - POST - new locations for multiple coffee shops
+/location - PATCH - city updating postal codes
+/employees - GET - employee information
+/employees/id - GET - payroll & scheduling
+/employees/id - DELETE - fired / stopped working
+/seating - GET - poll/list of seats
+/seating/id - GET - where people sit the most / numbering chairs & tables / favorite seating spots (mode)
+/bathroom - PUT - cleaned by employee and what time
+/bathroom - DELETE - not for customers
