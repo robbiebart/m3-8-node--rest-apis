@@ -7,6 +7,7 @@ const morgan = require("morgan");
 const { clients } = require("./data/clients");
 const { v4: uuidv4 } = require("uuid");
 
+const { words } = require("./data/words");
 /*
 const handleHomepage = (req, res) => {
   console.log(users);
@@ -48,8 +49,54 @@ const addClientHandler = (req, res) => {
 };
 
 const hangmanHandler = (req, res) => {
-  
-}
+  let number = Math.floor(Math.random() * 11);
+  const chosenWord = {
+    id: words[number].id,
+    letterCount: words[number].letterCount,
+  };
+  console.log("words", words);
+  console.log("number", number);
+  console.log("chosenword", chosenWord);
+  return res.json(chosenWord);
+};
+
+const wordChecker = (req, res) => {
+  // console.log("req", req);
+  let foundWordId = req.params.id;
+  let guessedLetter = req.params.letter;
+  const foundWord = words.find((element) => {
+    console.log("elementid", element.id);
+    console.log("foundwordId", foundWordId);
+    return element.id === foundWordId;
+  });
+
+  let wordArray = foundWord.word.split("");
+
+  let testResult = wordArray.map((letter) => {
+    if (letter === guessedLetter) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+  return res.json(testResult);
+};
+
+/*
+receive the id and guessed letter
+select the object in the words array based on id match (make foundWord)
+check if guessed letter is in foundWord
+
+if its a string, you can try calling array method; if this doesn't work, split it into an array,
+and loop through that array of letters checking for a match, and return an array of booleans
+describing the result of that test
+
+send back array of booleans
+
+make a an empty boolArray = {}
+loop through word array[]
+loop through it, if word[i] === word at re.params, do bool array.push true, else push false
+*/
 
 express()
   .use(function (req, res, next) {
@@ -72,6 +119,8 @@ express()
 
   .post("/clients/add", addClientHandler)
 
-  .get("/hangman/word/:id", hangmanHandler)
+  .get("/hangman/word", hangmanHandler)
+
+  .get("/hangman/guess/:id/:letter", wordChecker)
 
   .listen(8000, () => console.log(`Listening on port 8000`));
